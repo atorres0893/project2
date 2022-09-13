@@ -29,13 +29,7 @@ virtual_network_name = var.VNET_name1
 address_prefixes = ["10.10.2.0/24"]
  
 }
-resource "azurerm_subnet" "business_tier_east" {
-name = "business_tier"
-resource_group_name = var.rgName
-virtual_network_name = var.VNET_name1
-address_prefixes = ["10.10.3.0/24"]
- 
-}
+
 resource "azurerm_subnet" "sql_server_east" {
 name = "sql_server"
 resource_group_name = var.rgName
@@ -59,15 +53,7 @@ address_prefixes = ["10.11.2.0/24"]
  
 }
  
-resource "azurerm_subnet" "business_tier_central" {
-name = "business_tier"
-resource_group_name = var.rgName2
-virtual_network_name = var.VNET_name2
-address_prefixes = ["10.11.3.0/24"]
- 
-}
- 
-resource "azurerm_subnet" "sql_server_central" {
+ resource "azurerm_subnet" "sql_server_central" {
 name = "sql_server"
 resource_group_name = var.rgName2
 virtual_network_name = var.VNET_name2
@@ -125,39 +111,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_east" {
   }
 }
  
-resource "azurerm_linux_virtual_machine_scale_set" "business_tier_east" {
-  name                = "business-tier"
-  resource_group_name = var.rgName
-  location            = var.rglocation
-  sku                 = "Standard_F2"
-  instances           = 3
-  admin_username      = "adminuser"
-  admin_password = "Password123456"
-  disable_password_authentication = false
- 
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
-  }
- 
-  os_disk {
-    storage_account_type = "Standard_LRS"
-    caching              = "ReadWrite"
-  }
- 
-  network_interface {
-    name    = "business_tier"
-    primary = true
- 
-    ip_configuration {
-      name      = "business_tier"
-      primary   = true
-      subnet_id = azurerm_subnet.business_tier_east.id
-    }
-  }
-}
  
 resource "azurerm_linux_virtual_machine_scale_set" "web_tier_central" {
   name                = "web-tier"
@@ -189,40 +142,6 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_central" {
       name      = "web_tier"
       primary   = true
       subnet_id = azurerm_subnet.web_tier_central.id
-    }
-  }
-}
- 
-resource "azurerm_linux_virtual_machine_scale_set" "business_tier_central" {
-  name                = "business-tier"
-  resource_group_name = var.rgName2
-  location            = var.rglocation2
-  sku                 = "Standard_F2"
-  instances           = 3
-  admin_username      = "adminuser"
-  admin_password = "Password123456"
-  disable_password_authentication = false
- 
-  source_image_reference {
-    publisher = "Canonical"
-    offer     = "UbuntuServer"
-    sku       = "18.04-LTS"
-    version   = "latest"
-  }
- 
-  os_disk {
-    storage_account_type = "Standard_LRS"
-    caching              = "ReadWrite"
-  }
- 
-  network_interface {
-    name    = "business_tier"
-    primary = true
- 
-    ip_configuration {
-      name      = "business_tier"
-      primary   = true
-      subnet_id = azurerm_subnet.business_tier_central.id
     }
   }
 }

@@ -43,4 +43,5 @@ rgName2 = var.rgName2
 rglocation = var.rglocation
 rglocation2 = var.rglocation2
 storageName = var.storageName
+
 }
