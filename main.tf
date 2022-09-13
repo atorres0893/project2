@@ -1,7 +1,7 @@
-resource "azurerm_resource_group" "main" {
-    name = var.rgName
-    location = var.rglocation
-}
+# resource "azurerm_resource_group" "main" {
+#     name = var.rgName
+#     location = var.rglocation
+# }
 resource "azurerm_resource_group" "secondary"{
     name = var.rgName2
     location = var.rglocation2
@@ -44,4 +44,11 @@ rglocation = var.rglocation
 rglocation2 = var.rglocation2
 storageName = var.storageName
 #module.network.east_scaleset_id
+}
+
+module "traffmgr-lb" {
+    source = "./modules/traffmgr-lb"
+    rgName = var.rgName
+    rglocation = var.rglocation
+    profileName = var.profileName
 }

@@ -6,14 +6,10 @@ resource "random_id" "server" {
   byte_length = 8
 }
 
-resource "azurerm_resource_group" "serverrg" {
-  name     = var.rgName
-  location = var.rglocation
-}
 
 resource "azurerm_traffic_manager_profile" "profile" {
   name                   = var.profileName
-  resource_group_name    = azurerm_resource_group.serverrg.name
+  resource_group_name    = var.rgName
   traffic_routing_method = "Weighted"
 
   dns_config {

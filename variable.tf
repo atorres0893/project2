@@ -75,3 +75,7 @@ variable "blobName" {
     description = "Blob name"
   
 }
+variable "profileName" {
+    type = string
+    description = "(optional) describe your variable"
+}
