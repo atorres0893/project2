@@ -8,23 +8,23 @@ resource "azurerm_resource_group" "secondary"{
  
 }
  
-resource "azurerm_storage_account" "storage" {
-  name                     = var.storageName
-  resource_group_name      = var.rgName
-  location                 = azurerm_resource_group.main.location
-  account_tier             = var.accounttier
-  account_replication_type = "LRS"
-}
-resource "azurerm_storage_container" "container" {
-  name                  = var.storageName
-  storage_account_name  = azurerm_storage_account.storage.name
-}
-resource "azurerm_storage_blob" "storage" {
-  name                   = var.blobName
-  storage_account_name   = azurerm_storage_account.storage.name
-  storage_container_name = azurerm_storage_container.container.name
-  type                   = "Block"
-}
+#resource "azurerm_storage_account" "storage" {
+  #name                     = var.storageName
+ # resource_group_name      = var.rgName
+ # location                 = azurerm_resource_group.main.location
+ # account_tier             = var.accounttier
+  #account_replication_type = "LRS"
+#}
+#resource "azurerm_storage_container" "container" {
+  #name                  = var.storageName
+  #storage_account_name  = azurerm_storage_account.storage.name
+#}
+#resource "azurerm_storage_blob" "storage" {
+  #name                   = var.blobName
+  #storage_account_name   = azurerm_storage_account.storage.name
+  #storage_container_name = azurerm_storage_container.container.name
+  #type                   = "Block"
+#}
 
 module "network-scalesets" {
     source = "./modules/network-scalesets"
@@ -43,5 +43,5 @@ rgName2 = var.rgName2
 rglocation = var.rglocation
 rglocation2 = var.rglocation2
 storageName = var.storageName
-
+#module.network.east_scaleset_id
 }

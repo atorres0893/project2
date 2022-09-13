@@ -34,7 +34,7 @@ resource "azurerm_subnet" "sql_server_east" {
 name = "sql_server"
 resource_group_name = var.rgName
 virtual_network_name = var.VNET_name1
-address_prefixes = ["10.10.4.3/24"]
+address_prefixes = ["10.10.3.0/24"]
  
 }
 resource "azurerm_subnet" "web_tier_central" {
@@ -57,7 +57,7 @@ address_prefixes = ["10.11.2.0/24"]
 name = "sql_server"
 resource_group_name = var.rgName2
 virtual_network_name = var.VNET_name2
-address_prefixes = ["10.11.4.0/24"]
+address_prefixes = ["10.11.3.0/24"]
  
 }
  
