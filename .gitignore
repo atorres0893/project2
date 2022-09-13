@@ -2,4 +2,4 @@
 *.lock*
 *.backup*
 *.tfstate
-*.tfvars
+providers.tf
