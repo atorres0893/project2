@@ -53,6 +53,8 @@ module "traffmgr-lb" {
     profileName = var.profileName
     rgName2 = var.rgName2
     rglocation2 = var.rglocation2
+    BastionEastSub = module.network-scalesets.bastionsubnetid
+    BastionCentralSub = module.network-scalesets.bastionsubnetid2
 
     
 }

@@ -25,10 +25,10 @@ address_prefixes = var.addyPrefixVnet1
 resource "azurerm_subnet" "bastion_host_east" {
 name = "AzureBastionSubnet"
 resource_group_name = var.rgName
-virtual_network_name = var.VNET_name1
+virtual_network_name = azurerm_virtual_network.vnet1.name
 address_prefixes = ["10.10.2.0/24"]
  
-}
+} 
 
 resource "azurerm_subnet" "sql_server_east" {
 name = "sql_server"
@@ -145,3 +145,4 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_central" {
     }
   }
 }
+

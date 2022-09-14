@@ -57,8 +57,8 @@ resource "azurerm_public_ip" "centralvnetip" {
 
 resource "azurerm_lb" "centralvnetlb" {
   name                = "team4centrallb"
-  location            = var.rglocation
-  resource_group_name = var.rgName
+  location            = var.rglocation2
+  resource_group_name = var.rgName2
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
@@ -66,3 +66,44 @@ resource "azurerm_lb" "centralvnetlb" {
   }
 }
 
+
+
+resource "azurerm_public_ip" "bastioneast" {
+  name                = "BastionEastPIP"
+  location            = var.rglocation
+  resource_group_name = var.rgName
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_bastion_host" "bastionhosteast" {
+  name                = "BastionHostEast"
+  location            = var.rglocation
+  resource_group_name = var.rgName
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = var.BastionEastSub
+    public_ip_address_id = azurerm_public_ip.bastioneast.id
+  }
+}
+
+resource "azurerm_public_ip" "bastioncentral" {
+  name                = "BastionCentralIP"
+  location            = var.rglocation2
+  resource_group_name = var.rgName2
+  allocation_method   = "Static"
+  sku                 = "Standard"
+}
+
+resource "azurerm_bastion_host" "bastionhostcentral" {
+  name                = "BastionHostCentral"
+  location            = var.rglocation2
+  resource_group_name = var.rgName2
+
+  ip_configuration {
+    name                 = "configuration"
+    subnet_id            = var.BastionCentralSub
+    public_ip_address_id = azurerm_public_ip.bastioncentral.id
+  }
+}

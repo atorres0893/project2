@@ -18,3 +18,11 @@ variable "rglocation2" {
     type = string
     description = "rg location 2"
 }
+variable "BastionEastSub" {
+    type = string
+    description = "(optional) describe your variable"
+}
+variable "BastionCentralSub" {
+    type = string
+    description = "(optional) describe your variable"
+}
