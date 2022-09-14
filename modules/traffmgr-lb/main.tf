@@ -31,3 +31,38 @@ resource "azurerm_traffic_manager_profile" "profile" {
   }
 }
 
+resource "azurerm_public_ip" "eastvnetip" {
+  name                = "PublicIPForEastLB"
+  location            = var.rglocation
+  resource_group_name = var.rgName
+  allocation_method   = "Static"
+}
+
+resource "azurerm_lb" "eastvnetlb" {
+  name                = "team4eastLB"
+  location            = var.rglocation
+  resource_group_name = var.rgName
+
+  frontend_ip_configuration {
+    name                 = "FEIP"
+    public_ip_address_id = azurerm_public_ip.eastvnetip.id
+  }
+}
+resource "azurerm_public_ip" "centralvnetip" {
+  name                = "team4centralLB"
+  location            = var.rglocation2
+  resource_group_name = var.rgName2
+  allocation_method   = "Static"
+}
+
+resource "azurerm_lb" "centralvnetlb" {
+  name                = "team4centrallb"
+  location            = var.rglocation
+  resource_group_name = var.rgName
+
+  frontend_ip_configuration {
+    name                 = "PublicIPAddress"
+    public_ip_address_id = azurerm_public_ip.centralvnetip.id
+  }
+}
+

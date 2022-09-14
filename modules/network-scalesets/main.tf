@@ -23,7 +23,7 @@ address_prefixes = var.addyPrefixVnet1
  
 }
 resource "azurerm_subnet" "bastion_host_east" {
-name = "bastion_host"
+name = "AzureBastionSubnet"
 resource_group_name = var.rgName
 virtual_network_name = var.VNET_name1
 address_prefixes = ["10.10.2.0/24"]
@@ -46,7 +46,7 @@ address_prefixes = var.addyPrefixVnet2
 }
  
 resource "azurerm_subnet" "bastion_host_central" {
-name = "bastion_host"
+name = "AzureBastionSubnet"
 resource_group_name = var.rgName2
 virtual_network_name = var.VNET_name2
 address_prefixes = ["10.11.2.0/24"]

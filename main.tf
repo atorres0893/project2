@@ -51,4 +51,9 @@ module "traffmgr-lb" {
     rgName = var.rgName
     rglocation = var.rglocation
     profileName = var.profileName
+    rgName2 = var.rgName2
+    rglocation2 = var.rglocation2
+
+    
 }
+
