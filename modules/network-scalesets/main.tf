@@ -98,7 +98,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_east" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
- 
+  # os_profile {
+  #   computer_name  = "web-tier"
+  #   admin_username = "adminuser"
+  #   admin_password = "Password123456"
+  #   custom_data = filebase64("prac.sh")
+  # }
   network_interface {
     name    = "web_tier"
     primary = true
@@ -133,7 +138,12 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_central" {
     storage_account_type = "Standard_LRS"
     caching              = "ReadWrite"
   }
- 
+#  os_profile {
+#     computer_name  = "web-tier"
+#     admin_username = "adminuser"
+#     admin_password = "Password123456"
+#     custom_data = filebase64("prac.sh")
+#   }
   network_interface {
     name    = "web_tier"
     primary = true

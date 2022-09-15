@@ -74,6 +74,7 @@ resource "azurerm_lb" "centralvnetlb" {
     public_ip_address_id = azurerm_public_ip.centralvnetip.id
   }
 }
+
 resource "azurerm_lb_probe" "centralvnetlb" {
   loadbalancer_id = azurerm_lb.centralvnetlb.id
   name            = "healthprobe"
