@@ -36,12 +36,14 @@ resource "azurerm_public_ip" "eastvnetip" {
   location            = var.rglocation
   resource_group_name = var.rgName
   allocation_method   = "Static"
+  sku = "Standard"
 }
 
 resource "azurerm_lb" "eastvnetlb" {
   name                = "team4eastLB"
   location            = var.rglocation
   resource_group_name = var.rgName
+  sku = "Standard"
 
   frontend_ip_configuration {
     name                 = "FEIP"
@@ -53,12 +55,14 @@ resource "azurerm_public_ip" "centralvnetip" {
   location            = var.rglocation2
   resource_group_name = var.rgName2
   allocation_method   = "Static"
+  sku = "Standard"
 }
 
 resource "azurerm_lb" "centralvnetlb" {
   name                = "team4centrallb"
   location            = var.rglocation2
   resource_group_name = var.rgName2
+  sku = "Standard"
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
@@ -93,7 +97,8 @@ resource "azurerm_public_ip" "bastioncentral" {
   location            = var.rglocation2
   resource_group_name = var.rgName2
   allocation_method   = "Static"
-  sku                 = "Standard"
+  sku = "Standard"
+  
 }
 
 resource "azurerm_bastion_host" "bastionhostcentral" {

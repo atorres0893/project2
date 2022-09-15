@@ -59,3 +59,10 @@ module "traffmgr-lb" {
     
 }
 
+module "database" {
+  source = "./modules/database"
+  rgName = var.rgName
+  rgName2 = var.rgName2
+  rglocation = var.rglocation
+  rglocation2 = var.rglocation2
+}
