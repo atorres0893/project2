@@ -86,6 +86,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_east" {
   admin_username      = "adminuser"
   admin_password = "Password123456"
   disable_password_authentication = false
+  custom_data = filebase64("prac.sh")
  
   source_image_reference {
     publisher = "Canonical"
@@ -102,7 +103,7 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_east" {
   #   computer_name  = "web-tier"
   #   admin_username = "adminuser"
   #   admin_password = "Password123456"
-  #   custom_data = filebase64("prac.sh")
+  #   custom_data = 
   # }
   network_interface {
     name    = "web_tier"
@@ -126,7 +127,8 @@ resource "azurerm_linux_virtual_machine_scale_set" "web_tier_central" {
   admin_username      = "adminuser"
   admin_password = "Password123456"
   disable_password_authentication = false
- 
+  custom_data = filebase64("prac2.sh")
+  
   source_image_reference {
     publisher = "Canonical"
     offer     = "UbuntuServer"

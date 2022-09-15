@@ -50,6 +50,15 @@ resource "azurerm_lb" "eastvnetlb" {
     public_ip_address_id = azurerm_public_ip.eastvnetip.id
   }
 }
+
+resource "azurerm_lb_rule" "example" {
+  loadbalancer_id                = azurerm_lb.eastvnetlb.id
+  name                           = "LBRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = "FEIP"
+}
 resource "azurerm_lb_probe" "eastvnetlb" {
   loadbalancer_id = azurerm_lb.eastvnetlb.id
   name            = "healthprobe"
@@ -74,7 +83,14 @@ resource "azurerm_lb" "centralvnetlb" {
     public_ip_address_id = azurerm_public_ip.centralvnetip.id
   }
 }
-
+resource "azurerm_lb_rule" "central" {
+  loadbalancer_id                = azurerm_lb.centralvnetlb.id
+  name                           = "LBRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = "PublicIPAddress"
+}
 resource "azurerm_lb_probe" "centralvnetlb" {
   loadbalancer_id = azurerm_lb.centralvnetlb.id
   name            = "healthprobe"
