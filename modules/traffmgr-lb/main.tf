@@ -50,6 +50,11 @@ resource "azurerm_lb" "eastvnetlb" {
     public_ip_address_id = azurerm_public_ip.eastvnetip.id
   }
 }
+resource "azurerm_lb_probe" "eastvnetlb" {
+  loadbalancer_id = azurerm_lb.eastvnetlb.id
+  name            = "healthprobe"
+  port            = 80
+}
 resource "azurerm_public_ip" "centralvnetip" {
   name                = "team4centralLB"
   location            = var.rglocation2
@@ -68,6 +73,11 @@ resource "azurerm_lb" "centralvnetlb" {
     name                 = "PublicIPAddress"
     public_ip_address_id = azurerm_public_ip.centralvnetip.id
   }
+}
+resource "azurerm_lb_probe" "centralvnetlb" {
+  loadbalancer_id = azurerm_lb.centralvnetlb.id
+  name            = "healthprobe"
+  port            = 80
 }
 
 
@@ -112,3 +122,4 @@ resource "azurerm_bastion_host" "bastionhostcentral" {
     public_ip_address_id = azurerm_public_ip.bastioncentral.id
   }
 }
+
